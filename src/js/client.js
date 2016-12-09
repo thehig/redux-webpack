@@ -1,20 +1,43 @@
-import {createStore} from "redux";
+import { createStore, combineReducers } from "redux";
 
-const actions = {
-    "INC": (state, payload) => state + payload
-    , "DEC": (state, payload) => state - payload
-}
+// Simple number reducer
+// const actions = {
+//     "INC": (state, payload) => state + payload
+//     , "DEC": (state, payload) => state - payload
+// }
 
-const reducer = (state, action)=> actions[action.type] ? actions[action.type](state, action.payload) : state
+// const reducer = (state, action)=> actions[action.type] ? actions[action.type](state, action.payload) : state
 
-const store = createStore(reducer, 0);
+const userActions = {
+    "CHANGE_NAME": (state, payload)=> Object.assign({}, state, {name: payload})
+    , "CHANGE_AGE": (state, payload)=> Object.assign({}, state, {age: payload})
+};
+
+const userReducer = (state={"name": "", "age": 0}, action)=> userActions[action.type] ? userActions[action.type](state, action.payload) : state
+
+
+const tweetsActions = {
+
+};
+
+const tweetsReducer = (state=[], action)=>{
+    return state;
+};
+
+const reducers = combineReducers({
+    user: userReducer,
+    tweets: tweetsReducer
+});
+
+const store = createStore(reducers);
 
 store.subscribe(()=>{
     console.log("store changed", store.getState());
-})
+});
 
-store.dispatch({type: "INC", payload: 1});
-store.dispatch({type: "INC", payload: 2});
-store.dispatch({type: "INC", payload: 22});
-store.dispatch({type: "INC", payload: 1});
-store.dispatch({type: "DEC", payload: 1000});
+console.log("starting store", store.getState());
+
+store.dispatch({type: "CHANGE_NAME", payload: "Ben"});
+store.dispatch({type: "CHANGE_AGE", payload: 50});
+store.dispatch({type: "CHANGE_NAME", payload: "Fernando"});
+store.dispatch({type: "CHANGE_AGE", payload: 75});
