@@ -8,6 +8,7 @@ import logger from "redux-logger";
 import thunk from "redux-thunk";
 import promise from "redux-promise-middleware";
 
+
 /* // Single store with multiple reducers
 const userActions = {
     "CHANGE_NAME": (state, payload)=> Object.assign({}, state, {name: payload})

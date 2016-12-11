@@ -47,12 +47,16 @@ module.exports = {
         "no-console": "warn",
         "no-unused-vars": "warn",
 
+        // Whitespace rules
+        "no-trailing-spaces": "warn",       // http://eslint.org/docs/rules/no-trailing-spaces
+        "indent": ["warn", 4],              // http://eslint.org/docs/rules/indent
+
         // Immutable rules                  // https://github.com/jhusain/eslint-plugin-immutable
         "no-var": "error",
         "no-undef": "error",
         "no-param-reassign": "error",
         "immutable/no-let": "warn",
         "immutable/no-this": "warn",
-        "immutable/no-mutation": "warn"
+        "immutable/no-mutation": "warn",
     }
 }
